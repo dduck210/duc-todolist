@@ -1,0 +1,143 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "todo": "Học ReactJS",
+      "completed": true,
+      "userId": 1
+    },
+    {
+      "id": "2",
+      "todo": "Viết ứng dụng CRUD 1",
+      "completed": false,
+      "userId": 1
+    },
+    {
+      "id": "3",
+      "todo": "Đọc tài liệu Redux",
+      "completed": false,
+      "userId": 2
+    },
+    {
+      "id": "4",
+      "todo": "Làm bài tập về nhà",
+      "completed": false,
+      "userId": 2
+    },
+    {
+      "id": "5",
+      "todo": "Gửi email cho khách hàng",
+      "completed": false,
+      "userId": 1
+    },
+    {
+      "id": "6",
+      "todo": "Cập nhật hồ sơ cá nhân",
+      "completed": false,
+      "userId": 3
+    },
+    {
+      "id": "7",
+      "todo": "Chuẩn bị thuyết trình",
+      "completed": false,
+      "userId": 2
+    },
+    {
+      "id": "8",
+      "todo": "Xem video học lập trình",
+      "completed": false,
+      "userId": 4
+    },
+    {
+      "id": "9",
+      "todo": "Ôn tập Javascript",
+      "completed": false,
+      "userId": 4
+    },
+    {
+      "id": "10",
+      "todo": "Kiểm tra tiến độ dự án",
+      "completed": false,
+      "userId": 5
+    },
+    {
+      "id": "11",
+      "todo": "Ăn tối cùng bạn bè",
+      "completed": false,
+      "userId": 1
+    },
+    {
+      "id": "12",
+      "todo": "Tập thể dục buổi sáng",
+      "completed": false,
+      "userId": 3
+    },
+    {
+      "id": "13",
+      "todo": "Đọc sách mới",
+      "completed": false,
+      "userId": 1
+    },
+    {
+      "id": "14",
+      "todo": "Làm việc nhóm",
+      "completed": false,
+      "userId": 2
+    },
+    {
+      "id": "15",
+      "todo": "Tham gia buổi họp zoom",
+      "completed": true,
+      "userId": 5
+    },
+    {
+      "id": "16",
+      "todo": "Review code cho teammate",
+      "completed": true,
+      "userId": 3
+    },
+    {
+      "id": "17",
+      "todo": "Cập nhật nhật ký cá nhân",
+      "completed": false,
+      "userId": 1
+    },
+    {
+      "id": "18",
+      "todo": "Mua đồ dùng cần thiết",
+      "completed": true,
+      "userId": 4
+    },
+    {
+      "id": "19",
+      "todo": "Học tiếng Anh",
+      "completed": false,
+      "userId": 2
+    },
+    {
+      "id": "20",
+      "todo": "Tham khảo UI mới",
+      "completed": false,
+      "userId": 3
+    },
+    {
+      "id": "21",
+      "todo": "Sửa lỗi ứng dụng",
+      "completed": false,
+      "userId": 5
+    },
+    {
+      "id": "22",
+      "todo": "Nâng cấp hiệu suất web",
+      "completed": true,
+      "userId": 1
+    },
+    {
+      "id": "60b4",
+      "todo": "Học code php",
+      "completed": false,
+      "userId": 1
+    }
+  ],
+  "users": []
+}
