@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Header() {
+const Header = () => {
   //   const { user, logout } = useContext(UserContext);
   //   const navigate = useNavigate();
 
@@ -18,6 +18,9 @@ export default function Header() {
         <nav className="flex gap-3 items-center">
           <Link to="/" className="hover:underline hidden sm:inline">
             Home
+          </Link>
+          <Link to="/login" className="hover:underline hidden sm:inline">
+            Login
           </Link>
           {/* <Link to="/about" className="hover:underline hidden sm:inline">
             About
@@ -49,4 +52,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

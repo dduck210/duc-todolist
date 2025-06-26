@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import TodoList from "../components/TodoList";
 import TodoForm from "../components/TodoForm";
-import { CircularProgress } from "@mui/material";
-
-const API_URL = "http://localhost:3001/todos";
+import { addTodo, deleteTodo, getTodos, updateTodo } from "../api/todos";
+// import { CircularProgress } from "@mui/material";
 
 const Home = () => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notification, setNotification] = useState("");
+  //   const [query, setQuery] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(API_URL);
+        const res = await getTodos();
         setTimeout(() => {
           setTodos(res.data);
           setLoading(false);
@@ -27,14 +26,24 @@ const Home = () => {
     fetchData();
   }, []);
 
+  //   const fetchTodos = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const res = await getTodos();
+  //       console.log("Data", res.data);
+
+  //       setTodos(res.data);
+  //     } catch (err) {
+  //       setNotification("Can not call API");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
   const handleAdd = async (text) => {
     try {
       setLoading(true);
-      const res = await axios.post(API_URL, {
-        todo: text,
-        completed: false,
-        userId: 1,
-      });
+      const res = await addTodo({ todo: text, completed: false, userId: 1 });
       setTodos([res.data, ...todos]);
       setNotification("Thêm task thành công");
     } catch {
@@ -47,7 +56,7 @@ const Home = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      await deleteTodo(id);
       setTodos(todos.filter((todo) => todo.id !== id));
       setNotification("Đã xoá task");
     } catch (err) {
@@ -61,7 +70,7 @@ const Home = () => {
     try {
       const found = todos.find((task) => task.id === id);
       const updated = { ...found, completed };
-      await axios.put(`${API_URL}/${id}`, updated);
+      await updateTodo(id, updated);
       setTodos(
         todos.map((task) => (task.id === id ? { ...task, completed } : task))
       );
@@ -76,7 +85,7 @@ const Home = () => {
     try {
       const found = todos.find((task) => task.id === id);
       const updated = { ...found, todo: text };
-      await axios.put(`${API_URL}/${id}`, updated);
+      await updateTodo(id, updated);
       setTodos(
         todos.map((task) => (task.id === id ? { ...task, todo: text } : task))
       );
@@ -89,15 +98,20 @@ const Home = () => {
 
   const removeNotification = () => setTimeout(() => setNotification(""), 2000);
 
-  if (loading) {
-    return (
-      <div className="w-full h-screen flex flex-col items-center justify-center bg-white">
-        <span className="text-blue-600 font-semibold text-lg mb-4">
-          <CircularProgress /> Loading...
-        </span>
-      </div>
-    );
-  }
+  //   const filteredTodos = todos.filter((todo) =>
+  //     todo.todo.toLowerCase().includes(query.toLowerCase())
+  //   );
+
+  //   if (loading) {
+  //     return (
+  //       <div className="w-full h-screen flex flex-col items-center justify-center">
+  //         <span className="text-blue-600 font-semibold text-lg mb-4">
+  //           Đang tải dữ liệu...
+  //         </span>
+  //         <CircularProgress color="primary" size={48} />
+  //       </div>
+  //     );
+  //   }
 
   return (
     <section className="w-full mt-0">

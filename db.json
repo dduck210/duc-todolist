@@ -2,14 +2,14 @@
   "todos": [
     {
       "id": "1",
-      "todo": "Học ReactJS",
-      "completed": true,
+      "todo": "Học ReactJS ",
+      "completed": false,
       "userId": 1
     },
     {
       "id": "2",
       "todo": "Viết ứng dụng CRUD 1",
-      "completed": false,
+      "completed": true,
       "userId": 1
     },
     {
@@ -129,15 +129,26 @@
     {
       "id": "22",
       "todo": "Nâng cấp hiệu suất web",
-      "completed": true,
+      "completed": false,
       "userId": 1
     },
     {
-      "id": "60b4",
-      "todo": "Học code php",
-      "completed": false,
+      "id": "03ac",
+      "todo": "Học code Python 1",
+      "completed": true,
       "userId": 1
     }
   ],
-  "users": []
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123456"
+    },
+    {
+      "id": "2",
+      "username": "ducda",
+      "password": "1"
+    }
+  ]
 }

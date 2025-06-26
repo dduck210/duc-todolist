@@ -5,7 +5,7 @@ const TodoItem = ({ todo, onDelete, onToggle, onUpdate }) => {
 
   const handleEditSubmit = (event) => {
     event.preventDefault();
-    if (editedTodo.trim()) {
+    if (editedTodo) {
       onUpdate(todo.id, editedTodo);
       setEditing(false);
     }

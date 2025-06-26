@@ -4,6 +4,7 @@ const TodoList = ({ todos, onDelete, onUpdate, onToggle }) => {
   return (
     <div>
       {console.log(todos)}
+      {/* {console.log(onDelete)} */}
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}
