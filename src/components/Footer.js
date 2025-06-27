@@ -40,6 +40,14 @@ const Footer = () => {
           >
             Tailwind CSS
           </a>
+          <a
+            href="https://react.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            React
+          </a>
         </nav>
       </div>
     </footer>

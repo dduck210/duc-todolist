@@ -18,9 +18,9 @@ const Home = () => {
         setTimeout(() => {
           setTodos(res.data);
           setLoading(false);
-        }, 1500);
+        }, 2000);
       } catch (error) {
-        setNotification("K thể load data, vui lòng thử lại");
+        setNotification("Unable to load data, please try again!");
         setLoading(false);
       }
     };
@@ -36,9 +36,9 @@ const Home = () => {
         userId: 1,
       });
       setTodos([res.data, ...todos]);
-      setNotification("Thêm task thành công");
+      setNotification("Added task successfully!");
     } catch {
-      setNotification("Lỗi khi thêm task");
+      setNotification("Error adding task!");
     } finally {
       setLoading(false);
       removeNotification();
@@ -49,10 +49,10 @@ const Home = () => {
     try {
       await axios.delete(`${API_URL}/${id}`);
       setTodos(todos.filter((todo) => todo.id !== id));
-      setNotification("Đã xoá task");
+      setNotification("Task deleted!");
     } catch (err) {
       console.log("DELETE_ERROR:", err);
-      setNotification("K xoá được task");
+      setNotification("Cannot delete task!");
     }
     removeNotification();
   };
@@ -65,9 +65,9 @@ const Home = () => {
       setTodos(
         todos.map((task) => (task.id === id ? { ...task, completed } : task))
       );
-      setNotification("Đã cập nhật trạng thái");
+      setNotification("Status updated!");
     } catch {
-      setNotification("Cập nhật trạng thái thất bại");
+      setNotification("Update status failed!");
     }
     removeNotification();
   };
@@ -80,9 +80,9 @@ const Home = () => {
       setTodos(
         todos.map((task) => (task.id === id ? { ...task, todo: text } : task))
       );
-      setNotification("Đã sửa task");
+      setNotification("Fixed task!");
     } catch {
-      setNotification("Lỗi khi sửa task");
+      setNotification("Error when editing task!");
     }
     removeNotification();
   };
@@ -93,8 +93,9 @@ const Home = () => {
     return (
       <div className="w-full h-screen flex flex-col items-center justify-center bg-white">
         <span className="text-blue-600 font-semibold text-lg mb-4">
-          <CircularProgress /> Loading...
+          Loading...
         </span>
+        <CircularProgress />
       </div>
     );
   }

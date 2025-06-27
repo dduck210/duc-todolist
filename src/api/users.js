@@ -7,4 +7,9 @@ const getUserByUsername = async (username) => {
   return res.data[0];
 };
 
+export const createUser = async ({ username, password }) => {
+  const res = await axios.post(API_URL, { username, password });
+  return res.data;
+};
+
 export default getUserByUsername;
