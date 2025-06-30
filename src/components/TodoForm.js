@@ -6,20 +6,13 @@ const TodoForm = ({ onAdd }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!text) {
-      setError("Vui lòng nhập công việc!");
+      setError("Please enter task!");
       return;
     }
     setError("");
     onAdd(text);
     setText("");
   };
-
-  // const handleDelete = (event) => {
-  //   event.preventDefault();
-  //   if (text) {
-  //     setError("Xoá task");
-  //   }
-  // };
 
   return (
     <form
@@ -29,7 +22,7 @@ const TodoForm = ({ onAdd }) => {
       <div className="flex-1 flex flex-col">
         <input
           className={`border ${error ? "border-red-400" : "border-blue-300"} focus:border-blue-500 outline-none rounded-lg px-4 py-2 text-base shadow-sm transition-all duration-150 placeholder-gray-400 bg-white`}
-          placeholder="Nhập công việc mới..."
+          placeholder="Enter new task..."
           value={text}
           onChange={(event) => {
             setText(event.target.value);
@@ -51,7 +44,7 @@ const TodoForm = ({ onAdd }) => {
         className="px-6 py-2 mb-6 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-base font-semibold shadow transition-all duration-150 w-full sm:w-auto"
         type="submit"
       >
-        Thêm
+        Add
       </button>
     </form>
   );
