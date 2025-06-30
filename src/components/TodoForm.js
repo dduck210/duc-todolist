@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+
 const TodoForm = ({ onAdd }) => {
   const [text, setText] = useState("");
   const [error, setError] = useState("");
@@ -6,7 +8,7 @@ const TodoForm = ({ onAdd }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!text) {
-      setError("Please enter task!");
+      toast.info("Please enter task!");
       return;
     }
     setError("");
@@ -16,10 +18,10 @@ const TodoForm = ({ onAdd }) => {
 
   return (
     <form
-      className="flex flex-col sm:flex-row gap-3 mb-6 w-full"
+      className="flex flex-col sm:flex-row gap-3 mb-0 w-full"
       onSubmit={handleSubmit}
     >
-      <div className="flex-1 flex flex-col">
+      <div className="flex flex-col w-65 sm:w-80">
         <input
           className={`border ${error ? "border-red-400" : "border-blue-300"} focus:border-blue-500 outline-none rounded-lg px-4 py-2 text-base shadow-sm transition-all duration-150 placeholder-gray-400 bg-white`}
           placeholder="Enter new task..."

@@ -1,21 +1,18 @@
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ todos, onDelete, onUpdate, onToggle }) => {
-  return (
-    <div>
-      {console.log(todos)}
-      {/* {console.log(onDelete)} */}
-      {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          onDelete={onDelete}
-          onUpdate={onUpdate}
-          onToggle={onToggle}
-        />
-      ))}
-    </div>
-  );
-};
+const TodoList = ({ todos, onDelete, onUpdate, onToggle, onDetail }) => (
+  <div>
+    {todos.map((todo) => (
+      <TodoItem
+        key={todo.id}
+        todo={todo}
+        onDelete={onDelete}
+        onUpdate={onUpdate}
+        onToggle={onToggle}
+        onDetail={onDetail}
+      />
+    ))}
+  </div>
+);
 
 export default TodoList;
