@@ -1,38 +1,79 @@
-import { useState } from "react";
-const TodoItem = ({ todo, onDelete, onToggle, onUpdate }) => {
-  const [editing, setEditing] = useState(false);
-  const [editedTodo, setEditedTodo] = useState(todo.todo);
+import React, { useState } from "react";
 
-  const handleEditSubmit = (event) => {
-    event.preventDefault();
-    if (editedTodo) {
-      onUpdate(todo.id, editedTodo);
-      setEditing(false);
+const TodoItem = ({ todo, onDelete, onToggle, onUpdate, onDetail }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(todo.todo);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+    setEditText(todo.todo);
+  };
+
+  const handleSave = () => {
+    if (editText.trim() !== "") {
+      onUpdate(todo.id, editText);
+      setIsEditing(false);
     }
   };
 
+  // icon trạng thái
+  let statusIcon = null;
+  if (todo.completed === undefined || todo.completed === null) {
+    statusIcon = <span className="text-yellow-500 font-bold text-lg">?</span>;
+  } else if (todo.completed === false) {
+    statusIcon = <span className="text-orange-500 font-bold text-lg">!</span>;
+  } else if (todo.completed === true) {
+    statusIcon = (
+      <svg
+        className="w-5 h-5 text-green-500"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={3}
+        viewBox="0 0 24 24"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    );
+  }
+
+  // Toggle
+  const handleToggleStatus = () => {
+    let nextStatus;
+    if (todo.completed === undefined || todo.completed === null) {
+      nextStatus = false;
+    } else if (todo.completed === false) {
+      nextStatus = true;
+    } else if (todo.completed === true) {
+      nextStatus = null;
+    }
+    onToggle(todo.id, nextStatus);
+  };
+
   return (
-    <div
-      className={`flex flex-col lg:flex-row items-start lg:items-center justify-between border border-gray-200 shadow-md rounded-xl mb-4 px-5 py-4 transition-all duration-200
-      ${todo.completed ? "bg-gradient-to-r from-green-100 to-green-50" : "bg-white hover:bg-blue-50"}`}
-    >
-      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 flex-1 w-full">
-        <input
-          type="checkbox"
-          checked={todo.completed}
-          onChange={() => onToggle(todo.id, !todo.completed)}
-          className="w-5 h-5 accent-blue-500 transition-all duration-150"
-        />
-        {editing ? (
+    <div className="flex items-center justify-between py-2 border-b">
+      <div
+        className={`flex-1 cursor-pointer break-words truncate max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl ${todo.completed === true ? "line-through text-gray-400" : ""}`}
+        onClick={isEditing ? undefined : () => onDetail(todo)}
+        title="Click to see details"
+      >
+        {isEditing ? (
           <form
-            onSubmit={handleEditSubmit}
-            className="flex flex-col lg:flex-row gap-2 flex-1 w-full"
+            className="flex items-center gap-2 w-full"
+            onSubmit={(event) => {
+              event.preventDefault();
+              handleSave();
+            }}
+            onClick={(event) => event.stopPropagation()}
+            onMouseDown={(event) => event.stopPropagation()}
           >
             <input
-              className="border border-blue-300 focus:border-blue-500 outline-none rounded-lg px-3 py-2 flex-1 text-base shadow-sm transition-all duration-150"
-              value={editedTodo}
-              onChange={(event) => setEditedTodo(event.target.value)}
+              className="border rounded px-2 py-1 flex-1"
+              value={editText}
+              onChange={(event) => setEditText(event.target.value)}
               autoFocus
+              onClick={(event) => event.stopPropagation()}
+              onMouseDown={(event) => event.stopPropagation()}
+              readOnly={false}
             />
             <div className="flex gap-2">
               <button
@@ -44,39 +85,53 @@ const TodoItem = ({ todo, onDelete, onToggle, onUpdate }) => {
               <button
                 type="button"
                 className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-xs font-semibold transition-all duration-150"
-                onClick={() => setEditing(false)}
+                onClick={() => setIsEditing(false)}
               >
                 Cancel
               </button>
             </div>
           </form>
         ) : (
-          <span
-            className={
-              "break-all flex-1 text-base font-medium transition-all duration-150 " +
-              (todo.completed ? "line-through text-gray-400" : "text-gray-800")
-            }
-          >
-            {todo.todo}
-          </span>
+          todo.todo
         )}
       </div>
-      {!editing && (
-        <div className="flex gap-2 mt-3 lg:mt-0 lg:ml-4">
-          <button
-            className="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-lg text-xs font-semibold shadow transition-all duration-150"
-            onClick={() => setEditing(true)}
-          >
-            Edit
-          </button>
-          <button
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow transition-all duration-150"
-            onClick={() => onDelete(todo.id)}
-          >
-            Delete
-          </button>
-        </div>
-      )}
+      <div className="flex gap-2 items-center">
+        <button
+          className={`w-7 h-7 flex items-center justify-center rounded-full border-2 transition
+            ${
+              todo.completed === true
+                ? "bg-green-100 border-green-500"
+                : todo.completed === false
+                  ? "bg-orange-100 border-orange-500"
+                  : "bg-yellow-100 border-yellow-500"
+            }
+          `}
+          title="Toggle status"
+          onClick={handleToggleStatus}
+        >
+          {statusIcon}
+        </button>
+        <button
+          className="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-xs text-white"
+          onClick={handleEdit}
+        >
+          Edit
+        </button>
+        <button
+          className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-xs text-white"
+          onClick={() => onDelete(todo.id)}
+        >
+          Delete
+        </button>
+        <button
+          className="bg-blue-400 hover:bg-blue-500 px-3 py-1 rounded text-xs text-white"
+          onClick={() => onDetail(todo)}
+          disabled={isEditing}
+          style={isEditing ? { pointerEvents: "none", opacity: 0.5 } : {}}
+        >
+          Detail
+        </button>
+      </div>
     </div>
   );
 };

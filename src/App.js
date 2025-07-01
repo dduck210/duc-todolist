@@ -7,7 +7,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/hooks/ProtectedRoute";
-// import UnauthRoute from "./components/UnauthRoute";
+import UnauthRoute from "./components/hooks/UnauthRoute";
+import TestToast from "./components/TestToast";
 
 function App() {
   return (
@@ -24,8 +25,23 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route
+              path="/login"
+              element={
+                <UnauthRoute>
+                  <Login />
+                </UnauthRoute>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <UnauthRoute>
+                  <Register />
+                </UnauthRoute>
+              }
+            />
+            <Route path="/test-toast" element={<TestToast />} />
           </Routes>
         </main>
         <Footer />
