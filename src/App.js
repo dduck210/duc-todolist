@@ -7,8 +7,8 @@ import Register from "./pages/Register";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/hooks/ProtectedRoute";
 import UnauthRoute from "./components/hooks/UnauthRoute";
-import Loading from "./components/Loading/Loading";
 import TestToast from "./components/TestToast";
+import Loading from "./components/Loading/Loading";
 
 function App() {
   return (
