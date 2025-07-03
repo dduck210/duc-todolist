@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import Loading from "./components/loading/Loading";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/hooks/ProtectedRoute";
 import UnauthRoute from "./components/hooks/UnauthRoute";
+import Loading from "./components/Loading/Loading";
 import TestToast from "./components/TestToast";
 
 function App() {
